@@ -13,6 +13,7 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '/public')));
 
+//TODO: Need to move the logic to separate handler similar to errorHandler
 app.use((req, res, next) => {
     logEvent(`${req.method}\t${req.headers.origin}\t${req.url}\n`, 'requestTracing.txt');
     console.log(`${req.method}\t${req.path}`);
@@ -34,11 +35,6 @@ app.get('/products(.html)?', (req, res) => {
 
 app.use('/api/products', productsRouter);
 app.use('/api/times', require('./routes/times'));
-
-app.get('/error', (req, res, next) => {
-    const x = 5 / 0;
-    next();
-});
 
 app.use(require('./middlewares/errorHandler'));
 
