@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const productsRouter = require('./routes/products')
+const productsRouter = require('./routes/products');
 const logEvent = require('./middlewares/logEvents');
 
 const PORT = process.env.PORT || 5000;
@@ -33,6 +33,7 @@ app.get('/products(.html)?', (req, res) => {
 });
 
 app.use('/api/products', productsRouter);
+app.use('/api/times', require('./routes/times'));
 
 app.get('/error', (req, res, next) => {
     const x = 5 / 0;

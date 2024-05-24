@@ -17,8 +17,8 @@ const productSchema = Joi.object({
     .required()
 });
 
-function getMax(array){
-    let Ids = array.map(item => item.id);
+function getMax(productsArray){
+    let Ids = productsArray.map(item => item.id);
     return Ids.reduce((max,current) => Math.max(max, current), Ids[0]);
 }
 
