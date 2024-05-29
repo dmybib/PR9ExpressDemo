@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Express App: Add new Product</title>
+</head>
+<body>
+    <h3>Create New Product</h3>
+    <form id="form">
+        <input name="name" type="text" placeholder="Product Name">
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        window.onload = (event) => {
+            const formElem = document.getElementById("form");
+
+            formElem.addEventListener('submit', (event) => {
+                event.preventDefault();
+                
+                const formData = new FormData(formElem);
+                
+                let jsonObject = {};
+                formData.forEach((value, key) => {
+                    jsonObject[`${key}`] = value;
+                });
+
+                fetch("/api/products", { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': "application/json"
+                    },
+                    body: JSON.stringify(jsonObject)
+                })
+                .then(res => {
+                    document.location = '/products';
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            });
+        };
+    </script>
+</body>
+</html>
