@@ -33,8 +33,17 @@ app.get('/products(.html)?', (req, res) => {
     res.sendFile('./views/products.html', { root: __dirname});
 });
 
+app.get('/toDoList(.html)?', (req, res) => {
+    res.sendFile('./views/toDoList.html', { root: __dirname});
+});
+
+app.get('/create(.html)?', (req, res) => {
+    res.sendFile('./views/create.html', { root: __dirname});
+});
+
 app.use('/api/products', productsRouter);
 app.use('/api/times', require('./routes/times'));
+app.use('/api/toDoList', require('./routes/toDoList'));
 
 app.use(require('./middlewares/errorHandler'));
 
